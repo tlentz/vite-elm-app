@@ -1,0 +1,21 @@
+{
+  "name": "vite-elm-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.2.3",
+    "elm": "^0.19.1-5",
+    "elm-format": "^0.8.7",
+    "prettier": "^2.8.8",
+    "sass": "^1.62.1",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.8",
+    "vite-plugin-elm": "^2.8.0"
+  }
+}
