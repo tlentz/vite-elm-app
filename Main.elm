@@ -1,39 +1,21 @@
 module Main exposing (main)
 
-import Browser exposing (Document)
+import Browser
 import Browser.Navigation
-import Html exposing (Html, button, div, text)
-import Html.Attributes exposing (class)
-import Html.Events exposing (onClick)
 import Json.Decode as Decode
+import Types exposing (Model, Msg(..), ViewType(..))
 import Url exposing (Url)
+import View exposing (view)
 
 
-type alias Model =
-    { count : Int, view : ViewType }
-
-
-initialModel : Model
-initialModel =
-    { count = 0, view = View1 }
+initialModel : Browser.Navigation.Key -> Model
+initialModel k =
+    { count = 0, view = View1 k }
 
 
 init : Decode.Value -> Url -> Browser.Navigation.Key -> ( Model, Cmd Msg )
 init json url navigationKey =
-    ( initialModel, Cmd.none )
-
-
-type Msg
-    = Increment
-    | Decrement
-    | OnUrlRequest Browser.UrlRequest
-    | OnUrlChange Url
-    | ChangeView ViewType
-
-
-type ViewType
-    = View1
-    | View2
+    ( initialModel navigationKey, Cmd.none )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -50,30 +32,6 @@ update msg model =
 
         _ ->
             ( model, Cmd.none )
-
-
-view : Model -> Document Msg
-view model =
-    { title = "vite elm app"
-    , body =
-        [ case model.view of
-            View1 ->
-                div [ class "blue" ]
-                    [ button [ onClick Increment ] [ text "+1" ]
-                    , div [] [ text <| String.fromInt model.count ]
-                    , button [ onClick Decrement ] [ text "-1" ]
-                    , div [] []
-                    , button [ onClick <| ChangeView View2 ] [ text "change view" ]
-                    ]
-
-            View2 ->
-                div []
-                    [ Html.text "hello"
-                    , div [] []
-                    , button [ onClick <| ChangeView View1 ] [ text "change view" ]
-                    ]
-        ]
-    }
 
 
 subscriptions _ =

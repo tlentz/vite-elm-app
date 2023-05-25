@@ -7,7 +7,6 @@ export default defineConfig(async (env) => {
   return {
     plugins: [elmPlugin.plugin({ debug: withDebugger, optimize: optimize })],
     server: {
-      hmr: false,
       host: "localhost",
       port,
       strictPort: true,
